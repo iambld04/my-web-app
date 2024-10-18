@@ -1,32 +1,52 @@
-from flask import Flask, render_template, request, jsonify
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandenawaz's Web App</title>
+    <link rel="stylesheet" href="/static/styles.css">  <!-- Link to the CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Bandenawaz's Web App</h1>
 
-app = Flask(__name__)
+        <form action="/submit" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+            <br><br>
 
-@app.route('/submit', methods=['POST'])
-def submit():
-    # Get the form data
-    user_name = request.form.get('name')
-    user_email = request.form.get('email')
-    user_age = request.form.get('age')
-    user_address = request.form.get('address')
-    user_gender = request.form.get('gender')
-    user_phone = request.form.get('phone')
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-    # Prepare the response as JSON
-    user_details = {
-        'name': user_name,
-        'email': user_email,
-        'age': user_age,
-        'address': user_address,
-        'gender': user_gender,
-        'phone': user_phone
-    }
+            <br><br>
 
-    return jsonify(user_details)
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="1" required>
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080)
+            <br><br>
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" rows="4" cols="50" required></textarea>
+
+            <br><br>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+            <br><br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="1234567890" required>
+
+            <br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
